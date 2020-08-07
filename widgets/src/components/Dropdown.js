@@ -5,17 +5,25 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   const ref = useRef();
 
   useEffect(() => {
+<<<<<<< Updated upstream
     const onBodyClick = (event) => {
+=======
+    document.body.addEventListener("click", (event) => {
+>>>>>>> Stashed changes
       if (ref.current.contains(event.target)) {
         return;
       }
       setOpen(false);
+<<<<<<< Updated upstream
     };
     document.body.addEventListener("click", onBodyClick);
 
     return () => {
       document.body.removeEventListener("click", onBodyClick);
     };
+=======
+    });
+>>>>>>> Stashed changes
   }, []);
 
   const renderedOptions = options.map((option) => {
@@ -33,6 +41,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
       </div>
     );
   });
+
   return (
     <div ref={ref} className="ui form">
       <div className="field">
