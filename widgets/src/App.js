@@ -1,7 +1,10 @@
+import { Switch, Route, Link } from "react-router-dom";
+
 import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
+import Translate from "./components/Translate";
 
 const items = [
   {
@@ -36,18 +39,51 @@ const App = () => {
   const [showDropdown, setShowDropdown] = useState(true);
 
   return (
-    <div>
-      <button onClick={() => setShowDropdown(!showDropdown)}>
-        Toggle Dropdown
-      </button>
-      {showDropdown ? (
-        <Dropdown
-          options={options}
-          selected={selected}
-          onSelectedChange={setSelected}
+    <>
+      <div>
+        <div className="ui secondary pointer menu">
+          <Link to="/" className="item">
+            Accordion
+          </Link>
+          <Link to="/list" className="item">
+            Search
+          </Link>
+          <Link to="/dropdown" className="item">
+            Dropdown
+          </Link>
+          <Link to="/translate" className="item">
+            Translate
+          </Link>
+        </div>
+      </div>
+
+      <Switch>
+        <Route exact path="/">
+          <Accordion items={items} />
+        </Route>
+        <Route exact path="/list" component={Search} />
+        <Route
+          exact
+          path="/dropdown"
+          component={() => (
+            <div>
+              <button onClick={() => setShowDropdown(!showDropdown)}>
+                Toggle Dropdown
+              </button>
+              {showDropdown ? (
+                <Dropdown
+                  options={options}
+                  selected={selected}
+                  onSelectedChange={setSelected}
+                />
+              ) : null}
+            </div>
+          )}
         />
-      ) : null}
-    </div>
+
+        <Route path="/translate" component={Translate} />
+      </Switch>
+    </>
   );
 };
 
